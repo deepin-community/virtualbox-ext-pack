@@ -1,0 +1,39 @@
+#!/bin/sh
+#set -e
+
+version="#VERSION#"
+hash="f92bd4d5a6a522897914c7df21bfd3262ffeaffa740d648738f335a867a18b16"
+file="Oracle_VM_VirtualBox_Extension_Pack-${version}.vbox-extpack"
+accept_license="33d7284dc4a0ece381196fda3cfe2ed0e1e8e7ed7f27b9a9ebc4ee22e24bd23c"
+
+error ()
+{
+	if [ "${1}" = "hash" ] ; then
+		echo "Hash mismatch ${file}: expected ${hash}, removing the file."
+		rm -f ${file}
+	elif [ "${1}" = "install" ]; then
+		echo "Installation error: License key incorrect or unknown problem during installation."
+	fi
+	exit 1
+}
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ "${1}" = "configure" ] ; then
+	sharedir="/usr/share/virtualbox-ext-pack"
+	cachedir="/var/cache/virtualbox-ext-pack"
+	if [ -f ${sharedir}/${file} ]; then
+		echo "installing pre-downloaded file from ${sharedir}"
+		cd ${sharedir}
+	else
+		cd ${cachedir}
+		echo "virtualbox-ext-pack: downloading: https://download.virtualbox.org/virtualbox/${version}/${file}"
+		echo "The file will be downloaded into ${cachedir}"
+		/usr/bin/wget -q -N https://download.virtualbox.org/virtualbox/${version}/${file}
+	fi
+	echo "${hash} ${file}" | sha256sum -c > /dev/null 2>&1 || error hash
+	vboxmanage extpack install --replace --accept-license=${accept_license} ${file} || error install
+fi
+
+#DEBHELPER#

@@ -1,15 +1,33 @@
-Source: template-repository
-Section: unknown
+Source: virtualbox-ext-pack
+Section: contrib/misc
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Virtualbox Team <team+debian-virtualbox@tracker.debian.org>
+Uploaders:
+ Gianfranco Costamagna <locutusofborg@debian.org>,
+ Unit 193 <unit193@debian.org>
+Build-Depends:
+ debhelper-compat (= 12),
+ ca-certificates,
+ po-debconf
+Standards-Version: 4.6.1
+Rules-Requires-Root: no
+Homepage: https://www.virtualbox.org
+Vcs-Browser: https://salsa.debian.org/pkg-virtualbox-team/virtualbox-ext-pack
+Vcs-Git: https://salsa.debian.org/pkg-virtualbox-team/virtualbox-ext-pack.git
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: virtualbox-ext-pack
+Architecture: all
+Pre-Depends:
+ debconf
+Depends:
+ virtualbox (>= ${virtualbox:Version}) | virtualbox-7.0,
+ virtualbox (<< ${virtualbox:nextVersion}) | virtualbox-7.0,
+ wget,
+ ca-certificates,
+ ${misc:Depends}
+Description: extra capabilities for VirtualBox, downloader.
+ VirtualBox requires an extension pack to provide support for Remote
+ Desktop Protocol, USB 2.0, PXE booting for Intel network cards, etc.
+ This PUEL-licensed extension pack is free for personal use.
+ .
+ This package downloads the extension pack from internet during install.
