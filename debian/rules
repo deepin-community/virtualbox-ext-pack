@@ -1,4 +1,19 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/default.mk
+VERSION ?= $(DEB_VERSION_UPSTREAM)
+
 %:
-	dh $@
+	dh  $@
+
+override_dh_clean:
+	debconf-updatepo
+	dh_clean debian/postinst
+
+override_dh_installdeb:
+	sed 's/#VERSION#/$(DEB_VERSION_UPSTREAM)/g' debian/postinst.in > debian/postinst
+	dh_installdeb
+
+override_dh_gencontrol:
+	dh_gencontrol -- \
+		-Vvirtualbox:Version=$(DEB_VERSION_UPSTREAM)-dfsg-0~ -Vvirtualbox:nextVersion=$(DEB_VERSION_UPSTREAM)-dfsg-z
