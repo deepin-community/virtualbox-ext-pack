@@ -1,3 +1,31 @@
+virtualbox-ext-pack (7.1.8-1) unstable; urgency=medium
+
+  [ Mateusz Łukasik ]
+  * Team upload.
+  * New upstream version 7.1.8
+  * Update postinst hash
+
+  [ Gianfranco Costamagna ]
+  * New upstream version 7.1.0
+  * Update postinst hash
+  * Depend on virtualbox 7.1
+  * Update filename on watch file
+  * Update template for the license, was updated
+  * Also update filename for the download
+  * Update the license checksum for the auto accept
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 16 May 2025 15:19:45 +0200
+
+virtualbox-ext-pack (7.0.26-1) unstable; urgency=medium
+
+  * Update postinst file
+  * New upstream release.
+
+  [ Carles Pina i Estany ]
+  * Add Catalan po-debconf translation (Closes: #1101662)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 14 May 2025 14:07:50 +0200
+
 virtualbox-ext-pack (7.0.20-1) unstable; urgency=medium
 
   * Update postinst file
