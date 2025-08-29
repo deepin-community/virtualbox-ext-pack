@@ -9,7 +9,7 @@ Build-Depends:
  debhelper-compat (= 13),
  ca-certificates,
  po-debconf
-Standards-Version: 4.7.0
+Standards-Version: 4.7.2
 Rules-Requires-Root: no
 Homepage: https://www.virtualbox.org
 Vcs-Browser: https://salsa.debian.org/pkg-virtualbox-team/virtualbox-ext-pack
@@ -20,8 +20,8 @@ Architecture: all
 Pre-Depends:
  debconf
 Depends:
- virtualbox (>= ${virtualbox:Version}) | virtualbox-7.1,
- virtualbox (<< ${virtualbox:nextVersion}) | virtualbox-7.1,
+ virtualbox (>= ${virtualbox:Version}) | virtualbox-7.2,
+ virtualbox (<< ${virtualbox:nextVersion}) | virtualbox-7.2,
  wget,
  ca-certificates,
  ${misc:Depends}
